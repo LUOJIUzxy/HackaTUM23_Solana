@@ -5,7 +5,7 @@ import { alpha, useTheme } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import { WalletNotConnectedError } from '@solana/wallet-adapter-base';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
-import { Connection, Keypair, SystemProgram, Transaction } from '@solana/web3.js';
+import { Connection, Keypair, PublicKey, SystemProgram, Transaction, TransactionInstruction } from '@solana/web3.js';
 import { FC, useCallback } from 'react';
 
 import { NavItem } from './components';
@@ -25,11 +25,51 @@ const Topbar = ({
   const { mode } = theme.palette;
 
   // const { publicKey, sendTransaction } = useWallet();
+  // const publickKey = 'Cbs6hxFaAfBzNTxobZuqYQ5vWKGTEEUbbxbREtqMnxUX';
+  const programId = new PublicKey('Cbs6hxFaAfBzNTxobZuqYQ5vWKGTEEUbbxbREtqMnxUX');
+  const tokenMintPublicKey = new PublicKey('Cbs6hxFaAfBzNTxobZuqYQ5vWKGTEEUbbxbREtqMnxUX');
 
+  const wallet = useWallet();
   const [walletAddress, setWalletAddress] = useState(null);
   const [connection] = useState(new Connection('https://api.devnet.solana.com'));
   const [initializerAmount, setInitializerAmount] = useState('');
   const [takerAmount, setTakerAmount] = useState('');
+
+  async function initializeEscrow() {
+    const transaction = new Transaction();
+
+    const instruction = new TransactionInstruction({
+      keys: [
+        { pubkey: tokenMintPublicKey, isSigner: true, isWritable: true },
+        // { pubkey: escrowAccount, isSigner: false, isWritable: true },
+        // { pubkey: depositTokenAccountPubkey, isSigner: false, isWritable: true },
+        // { pubkey: receiveTokenAccountPubkey, isSigner: false, isWritable: true },
+        { pubkey: tokenMintPublicKey, isSigner: false, isWritable: false },
+        { pubkey: SystemProgram.programId, isSigner: false, isWritable: false },
+      ],
+      programId: programId,
+      data: Buffer.from([/* serialized data based on your contract's API */]),
+    });
+
+    transaction.add(instruction);
+
+    try {
+      const { blockhash } = await connection.getRecentBlockhash();
+      transaction.recentBlockhash = blockhash;
+      transaction.feePayer = wallet.publicKey;
+
+      const signedTransaction = await wallet.signTransaction(transaction);
+      const signature = await connection.sendRawTransaction(signedTransaction.serialize());
+      await connection.confirmTransaction(signature);
+
+      // setIsTransactionSent(true);
+      // setTransactionSignature(signature);
+      alert('Escrow initialized successfully!');
+    } catch (error) {
+      console.error('Error initializing escrow:', error);
+      alert('Failed to initialize escrow');
+    }
+  }
 
   // Function to handle wallet connection
   // Function to handle wallet connection

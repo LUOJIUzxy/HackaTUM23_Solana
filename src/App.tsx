@@ -37,6 +37,7 @@ require('@solana/wallet-adapter-react-ui/styles.css');
 const clientSideEmotionCache = createCache({key: 'css'});
 
 import PropTypes from 'prop-types';
+import AuthGuard from 'components/guards/AuthGuard';
 
 function App({emotionCache = clientSideEmotionCache}) {
   const content = useRoutes(Routes);
@@ -44,39 +45,6 @@ function App({emotionCache = clientSideEmotionCache}) {
   const persistor = persistStore(store);
   const network = WalletAdapterNetwork.Devnet;
 
-  // You can also provide a custom RPC endpoint.
-  // const endpoint = useMemo(() => clusterApiUrl(network), [network]);
-
-  // Create a test wallet to listen to
-  // const wallet = Keypair.generate();
-
-  // const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
-  // // Register a callback to listen to the wallet (ws subscription)
-  // connection.onAccountChange(
-  //   wallet.publicKey(),
-  //   (updatedAccountInfo, context) =>
-  //     console.log('Updated account info: ', updatedAccountInfo),
-  //   'confirmed'
-  // );
-
-  // const wallets = useMemo(
-  //   () => [
-  //     /**
-  //            * Wallets that implement either of these standards will be available automatically.
-  //            *
-  //            *   - Solana Mobile Stack Mobile Wallet Adapter Protocol
-  //            *     (https://github.com/solana-mobile/mobile-wallet-adapter)
-  //            *   - Solana Wallet Standard
-  //            *     (https://github.com/solana-labs/wallet-standard)
-  //            *
-  //            * If you wish to support a wallet that supports neither of those standards,
-  //            * instantiate its legacy wallet adapter here. Common legacy adapters can be found
-  //            * in the npm package `@solana/wallet-adapter-wallets`.
-  //            */
-  //     //new UnsafeBurnerWalletAdapter(),
-  //   ],
-  //   [network]
-  // );
 
 
 
@@ -86,18 +54,9 @@ function App({emotionCache = clientSideEmotionCache}) {
       <ReactNotifications/>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <AuthProvider>{content}</AuthProvider>
-          {/* <ConnectionProvider endpoint={endpoint}>
-            <WalletProvider wallets={wallets} autoConnect>
-              <WalletModalProvider> */}
-          <WalletMultiButton />
-          <WalletDisconnectButton />
+          <AuthProvider>{content}</AuthProvider>      
           <Page>
           </Page>
-          { /* Your app's components go here, nested within the context providers. */ }
-          {/* </WalletModalProvider>
-            </WalletProvider>
-          </ConnectionProvider> */}
         </PersistGate>
       </Provider>
     </CacheProvider>

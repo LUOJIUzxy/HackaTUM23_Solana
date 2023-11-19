@@ -112,7 +112,8 @@ const Agency = (): JSX.Element => {
         <Box
           className={'jarallax-img'}
           sx={styles(
-            'https://assets.maccarianagency.com/backgrounds/img48.jpg',
+            // 'https://assets.maccarianagency.com/backgrounds/img48.jpg',
+            '/2.jpeg',
           )}
         />
         <Container>
@@ -131,7 +132,8 @@ const Agency = (): JSX.Element => {
         <Box
           className={'jarallax-img'}
           sx={styles(
-            'https://assets.maccarianagency.com/backgrounds/img44.jpg',
+            // 'https://assets.maccarianagency.com/backgrounds/img44.jpg',
+            '/3.jpeg'
           )}
         />
         <Container>
@@ -161,7 +163,8 @@ const Agency = (): JSX.Element => {
         <Box
           className={'jarallax-img'}
           sx={styles(
-            'https://assets.maccarianagency.com/backgrounds/img45.jpg',
+            // 'https://assets.maccarianagency.com/backgrounds/img45.jpg',
+            '/4.jpeg'
           )}
         />
         <Container>
@@ -181,7 +184,8 @@ const Agency = (): JSX.Element => {
         <Box
           className={'jarallax-img'}
           sx={styles(
-            'https://assets.maccarianagency.com/backgrounds/img43.jpg',
+            // 'https://assets.maccarianagency.com/backgrounds/img43.jpg',
+            '/1.jpeg'
           )}
         />
         <Container>
