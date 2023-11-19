@@ -16,10 +16,10 @@ const Larq = (): JSX.Element => {
         sx={{
           fontWeight: 900,
           color: theme.palette.common.white,
-          textTransform: 'uppercase',
+          // textTransform: 'uppercase',
         }}
       >
-        Cryptos
+        The new way to earn on your cryptos
       </Typography>
       <Typography
         variant="h6"
@@ -30,7 +30,7 @@ const Larq = (): JSX.Element => {
           color: theme.palette.common.white,
         }}
       >
-        Cryptos
+        Tokenized Investment Service
       </Typography>
     </Box>
   );

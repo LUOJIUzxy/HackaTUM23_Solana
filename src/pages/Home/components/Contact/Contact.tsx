@@ -26,7 +26,7 @@ const Contact = (): JSX.Element => {
         color={'text.secondary'}
         align={'center'}
       >
-        哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈
+        @getRichFast.com
       </Typography>
       <Box marginTop={3} display={'flex'} justifyContent={'center'}>
         <Button
@@ -54,7 +54,7 @@ const Contact = (): JSX.Element => {
             </svg>
           }
         >
-          发现
+          Connect Wallet
         </Button>
       </Box>
     </Box>

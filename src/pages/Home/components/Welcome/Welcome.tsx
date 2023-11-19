@@ -10,6 +10,16 @@ const Welcome = (): JSX.Element => {
   const GridItemHeadlineBlock = () => (
     <Box>
       <Typography
+        variant="h1"
+        align={'center'}
+        gutterBottom
+        sx={{
+          fontWeight: 900,
+        }}
+      >
+        GM !
+      </Typography>
+      <Typography
         variant="h3"
         align={'center'}
         gutterBottom
@@ -17,7 +27,7 @@ const Welcome = (): JSX.Element => {
           fontWeight: 900,
         }}
       >
-        GM, Wanna get rich fast?
+        Wanna get rich fast?
       </Typography>
       <Typography
         variant="h6"
@@ -28,7 +38,7 @@ const Welcome = (): JSX.Element => {
           fontWeight: 400,
         }}
       >
-        Welcome to getRichFast.com!
+        Welcome to getRichFast.com
         <br /> Let's Ducking Goooooooo! - Your most reliable Tokenized Investment Service
       </Typography>
     </Box>

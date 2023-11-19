@@ -15,10 +15,10 @@ const Nike = (): JSX.Element => {
         sx={{
           fontWeight: 900,
           color: theme.palette.common.white,
-          textTransform: 'uppercase',
+          // textTransform: 'uppercase',
         }}
       >
-        Portfolios
+        We invest in the selected strategies and hands over the tokens to you
       </Typography>
       <Typography
         variant="h6"
@@ -29,7 +29,7 @@ const Nike = (): JSX.Element => {
           color: theme.palette.common.white,
         }}
       >
-        Portfoloos
+        
       </Typography>
     </Box>
   );

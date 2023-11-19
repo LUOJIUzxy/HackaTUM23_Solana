@@ -43,7 +43,7 @@ const Footer = (): JSX.Element => {
               <Link
                 underline="none"
                 component="a"
-                href="/home"
+                // href="/home"
                 color="text.primary"
                 variant={'subtitle2'}
               >
@@ -60,7 +60,7 @@ const Footer = (): JSX.Element => {
                 href="https://mui.com/store/items/the-front-landing-page/"
                 size="small"
               >
-                发现
+                Connect Wallet
               </Button>
             </Box>
           </Box>

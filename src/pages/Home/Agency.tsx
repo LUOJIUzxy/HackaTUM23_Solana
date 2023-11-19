@@ -188,7 +188,7 @@ const Agency = (): JSX.Element => {
           <Trek />
         </Container>
       </Box>
-      <Box
+      {/* <Box
         minHeight={'100vh'}
         display={'flex'}
         alignItems={'center'}
@@ -197,8 +197,8 @@ const Agency = (): JSX.Element => {
         <Container>
           <Reviews />
         </Container>
-      </Box>
-      <Box
+      </Box> */}
+      {/* <Box
         className={'jarallax'}
         data-jarallax
         data-speed="0.2"
@@ -214,8 +214,8 @@ const Agency = (): JSX.Element => {
             'https://assets.maccarianagency.com/backgrounds/img47.jpg',
           )}
         />
-      </Box>
-      <Box
+      </Box> */}
+      {/* <Box
         className={'jarallax'}
         data-jarallax
         data-speed="0.2"
@@ -224,18 +224,18 @@ const Agency = (): JSX.Element => {
         display={'flex'}
         alignItems={'center'}
         id="agency__portfolio-item--js-scroll"
-      >
+      > 
         <Box
           className={'jarallax-img'}
           sx={styles(
             'https://assets.maccarianagency.com/backgrounds/img46.jpg',
           )}
         />
-        <Container>
-          <Nike2 />
-        </Container>
-      </Box>
-      <Box
+         <Container>
+           <Nike2 /> 
+       </Container> 
+      </Box> 
+      {/* <Box
         minHeight={'100vh'}
         display={'flex'}
         alignItems={'center'}
@@ -244,7 +244,7 @@ const Agency = (): JSX.Element => {
         <Container>
           <Contact />
         </Container>
-      </Box>
+      </Box> */}
     </Main>
   );
 };

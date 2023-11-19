@@ -17,7 +17,7 @@ const AuthService = {
       }
     } catch (error) {
       if (error instanceof AxiosError) {
-        NotificationService('Validate JWT Fail', NotificationType.DANGER, error.response?.data.message);
+        // NotificationService('Validate JWT Fail', NotificationType.DANGER, error.response?.data.message);
       }
       return error;
     }

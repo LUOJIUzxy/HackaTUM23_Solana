@@ -16,10 +16,9 @@ const Goby = (): JSX.Element => {
         sx={{
           fontWeight: 900,
           color: theme.palette.common.white,
-          textTransform: 'uppercase',
         }}
       >
-        Portfolio
+        getRichFast.com
       </Typography>
       <Typography
         variant="h6"

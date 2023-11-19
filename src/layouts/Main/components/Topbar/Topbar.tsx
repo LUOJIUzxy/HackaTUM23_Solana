@@ -1,22 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { alpha, useTheme } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
+import { WalletNotConnectedError } from '@solana/wallet-adapter-base';
+import { useConnection, useWallet } from '@solana/wallet-adapter-react';
+import { Connection, Keypair, SystemProgram, Transaction } from '@solana/web3.js';
+import { FC, useCallback } from 'react';
 
 import { NavItem } from './components';
 
 interface Props {
-  // eslint-disable-next-line @typescript-eslint/ban-types
   onSidebarOpen: () => void;
-  // pages: {
-  //   landings: Array<PageItem>;
-  //   company: Array<PageItem>;
-  //   account: Array<PageItem>;
-  //   secondary: Array<PageItem>;
-  //   blog: Array<PageItem>;
-  //   portfolio: Array<PageItem>;
-  // };
+
   colorInvert?: boolean;
 }
 
@@ -27,14 +23,30 @@ const Topbar = ({
 }: Props): JSX.Element => {
   const theme = useTheme();
   const { mode } = theme.palette;
-  // const {
-  //   landings: landingPages,
-  //   secondary: secondaryPages,
-  //   company: companyPages,
-  //   account: accountPages,
-  //   portfolio: portfolioPages,
-  //   blog: blogPages,
-  // } = pages;
+
+  // const { publicKey, sendTransaction } = useWallet();
+
+  const [walletAddress, setWalletAddress] = useState(null);
+  const [connection] = useState(new Connection('https://api.devnet.solana.com'));
+  const [initializerAmount, setInitializerAmount] = useState('');
+  const [takerAmount, setTakerAmount] = useState('');
+
+  // Function to handle wallet connection
+  // Function to handle wallet connection
+  const handleConnectWallet = async () => {
+    try {
+      const solana = (window as any).solana;
+      if (solana && solana.isPhantom) {
+        const response = await solana.connect();
+        setWalletAddress(response.publicKey.toString());
+      } else {
+        alert('Solana wallet not found. Please install Phantom Wallet.');
+      }
+    } catch (err) {
+      console.error('Wallet Connection Error:', err);
+      alert('Failed to connect wallet');
+    }
+  };
 
   return (
     <Box
@@ -61,12 +73,13 @@ const Topbar = ({
           width={1}
         />
       </Box>
-      <Box sx={{ display: { xs: 'none', md: 'flex' } }} alignItems={'center'}>
+      <Box sx={{ display: { xs: 'none', md: 'flex', fontSize: '50px' } }} alignItems={'center'} >
         <Box>
           <NavItem
             title={'Home'}
             id={'home-pages'}
             redirect={'/home'}
+           
             // items={landingPages}
             colorInvert={colorInvert}
           />
@@ -117,10 +130,10 @@ const Topbar = ({
             color="primary"
             component="a"
             target="blank"
-            href="/home"
+            onClick={handleConnectWallet}
             size="large"
           >
-            Connect Wallet
+            {walletAddress ? `Wallet Connected: ${walletAddress}` : 'Connect Wallet'}
           </Button>
         </Box>
       </Box>

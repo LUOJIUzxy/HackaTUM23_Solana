@@ -30,7 +30,7 @@ const Trek = (): JSX.Element => {
           color: theme.palette.common.white,
         }}
       >
-        Contact Us
+        @getRichFast.com
       </Typography>
     </Box>
   );
