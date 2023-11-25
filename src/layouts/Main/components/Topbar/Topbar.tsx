@@ -7,6 +7,8 @@ import { WalletNotConnectedError } from '@solana/wallet-adapter-base';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { Connection, Keypair, PublicKey, SystemProgram, Transaction, TransactionInstruction } from '@solana/web3.js';
 import { FC, useCallback } from 'react';
+import { NotificationType } from '../../../../enum/notifcation-type-enum';
+import { NotificationService } from '../../../../services/notification-service';
 
 import { NavItem } from './components';
 
@@ -80,11 +82,10 @@ const Topbar = ({
         const response = await solana.connect();
         setWalletAddress(response.publicKey.toString());
       } else {
-        alert('Solana wallet not found. Please install Phantom Wallet.');
+        NotificationService('Error!', NotificationType.DANGER, 'Solana wallet not found. Please install Phantom Wallet.');     
       }
     } catch (err) {
-      console.error('Wallet Connection Error:', err);
-      alert('Failed to connect wallet');
+      NotificationService('Error!', NotificationType.DANGER, 'Failed to connect wallet.');
     }
   };
 
