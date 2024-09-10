@@ -7,6 +7,24 @@ import Grid from '@mui/material/Grid';
 const Welcome = (): JSX.Element => {
   const theme = useTheme();
 
+  const styles = (bgImage: string) =>
+    ({
+      position: 'absolute',
+      objectFit: 'cover',
+      /* support for plugin https://github.com/bfred-it/object-fit-images */
+      fontFamily: 'object-fit: cover;',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      zIndex: -1,
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center center',
+      backgroundImage: `url(${bgImage})`,
+      filter: theme.palette.mode === 'dark' ? 'brightness(0.7)' : 'none',
+    } as const);
+
   const GridItemHeadlineBlock = () => (
     <Box>
       <Typography
@@ -54,10 +72,10 @@ const Welcome = (): JSX.Element => {
           src={'./solana.png'}
           alt="..."
           sx={{
-            filter:
-                theme.palette.mode === 'dark'
-                  ? 'brightness(0) invert(0.7)'
-                  : 'contrast(0) brightness(0)',
+            // filter:
+            //     theme.palette.mode === 'dark'
+            //       ? 'brightness(0) invert(0.7)'
+            //       : 'contrast(0) brightness(0)',
           }}
         /> 
        
@@ -76,6 +94,13 @@ const Welcome = (): JSX.Element => {
             justifyContent={'center'}
           >
             <GridItemHeadlineBlock />
+            <Box
+              className={'jarallax-img'}
+              sx={styles(
+                // 'https://assets.maccarianagency.com/backgrounds/img48.jpg',
+                '/home.jpg',
+              )}
+            />
           </Box>
         </Grid>
         <Grid item xs={12}>
@@ -90,6 +115,7 @@ const Welcome = (): JSX.Element => {
         </Grid>
       </Grid>
     </Box>
+    
   );
 };
 

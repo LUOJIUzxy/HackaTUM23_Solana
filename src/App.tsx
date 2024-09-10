@@ -49,18 +49,16 @@ function App({emotionCache = clientSideEmotionCache}) {
 
 
   return (
-   
-    <CacheProvider value={emotionCache}>
-      <ReactNotifications/>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <AuthProvider>{content}</AuthProvider>      
-          <Page>
-          </Page>
-        </PersistGate>
-      </Provider>
-    </CacheProvider>
-   
+    <Page> 
+      <CacheProvider value={emotionCache}>
+        <ReactNotifications/>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <AuthProvider>{content}</AuthProvider>      
+          </PersistGate>
+        </Provider>
+      </CacheProvider>
+    </Page> 
   );
 }
 

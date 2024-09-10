@@ -113,7 +113,7 @@ const Agency = (): JSX.Element => {
           className={'jarallax-img'}
           sx={styles(
             // 'https://assets.maccarianagency.com/backgrounds/img48.jpg',
-            '/2.jpeg',
+            '/home.jpg',
           )}
         />
         <Container>
@@ -185,7 +185,7 @@ const Agency = (): JSX.Element => {
           className={'jarallax-img'}
           sx={styles(
             // 'https://assets.maccarianagency.com/backgrounds/img43.jpg',
-            '/1.jpeg'
+            '/redlines.jpg'
           )}
         />
         <Container>

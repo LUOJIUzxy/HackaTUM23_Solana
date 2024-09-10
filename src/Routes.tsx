@@ -17,20 +17,24 @@ const TermsPage = async(() => import('./pages/CompanyTerms'));
 
 const ContactPage = async(() => import('./pages/Contacts'));
 const HomePage = async(() => import('./pages/Home'));
-const PortfolioPage = async(() => import('./pages/News'));
+const PortfolioPage = async(() => import('./pages/Portfolio'));
 const CryptoPage = async(() => import('./pages/Cryptos'));
 //const MeetupPage = async(() => import('./pages/Elearning'));
 // const SupportPage = async(() => import('./pages/HelpCenter'));
 const NFTPage = async(() => import('./pages/Album'));
 
 const Routes = [
-  {
-    path: '/',
-    element: (
-      <AuthGuard>
-      </AuthGuard>
-    ),
-  },
+  // {
+  //   path: '/',
+  //   children: [
+  //     {
+  //       element: (
+  //         <AuthGuard>
+  //         </AuthGuard>
+  //       ),
+  //     }
+  //   ]
+  // },
   {
     path: 'auth',
     children: [

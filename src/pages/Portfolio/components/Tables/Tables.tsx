@@ -12,22 +12,22 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import PythAbi from '@pythnetwork/pyth-sdk-solidity/abis/IPyth.json';
+import { ethers } from 'ethers';
 
 function createData(
   name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number,
-  price: number,
+  marketPrice: number,
+  volumn: number,
+  cost: number,
+  profit: number,
 ) {
   return {
     name,
-    calories,
-    fat,
-    carbs,
-    protein,
-    price,
+    marketPrice,
+    volumn,
+    cost,
+    profit,
     history: [
       {
         date: '2020-01-05',
@@ -62,17 +62,17 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         <TableCell component="th" scope="row">
           {row.name}
         </TableCell>
-        <TableCell align="right">{row.calories}</TableCell>
-        <TableCell align="right">{row.fat}</TableCell>
-        <TableCell align="right">{row.carbs}</TableCell>
-        <TableCell align="right">{row.protein}</TableCell>
+        <TableCell align="right">{row.marketPrice}</TableCell>
+        <TableCell align="right">{row.volumn}</TableCell>
+        <TableCell align="right">{row.cost}</TableCell>
+        <TableCell align="right">{row.profit}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
               <Typography variant="h6" gutterBottom component="div">
-                History
+                Clients
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
@@ -92,7 +92,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                       <TableCell>{historyRow.customerId}</TableCell>
                       <TableCell align="right">{historyRow.amount}</TableCell>
                       <TableCell align="right">
-                        {Math.round(historyRow.amount * row.price * 100) / 100}
+                        {Math.round(historyRow.amount * row.cost * 100) / 100}
                       </TableCell>
                     </TableRow>
                   ))}
@@ -107,12 +107,26 @@ function Row(props: { row: ReturnType<typeof createData> }) {
 }
 
 const rows = [
-  createData('SOL/USDC', 5000000, 69342.0, 7432543500, 4452352.0, 374364546.99),
-  createData('ETH/USDC', 200, 659.0, 37654900 ,534623400, 75436465.99),
-  createData('BTC/USDC', 40000, 64.0, 24654500, 5345982.0, 3235234.79),
-  createData('LINK/USDC', 15, 6536252.7, 670000, 453463.3, 235345346.5),
-  createData('XRP/USDC', 0.7, 54353.0, 495345300, 52354234.9, 235436546.5),
+  createData('SOL/USDC', 5000000, 69342.0, 7432543500, 4452352.0),
+  createData('ETH/USDC', 200, 659.0, 37654900 ,534623400),
+  createData('BTC/USDC', 40000, 64.0, 24654500, 5345982.0),
+  createData('LINK/USDC', 15, 6536252.7, 670000, 453463.3),
+  createData('XRP/USDC', 0.7, 54353.0, 495345300, 52354234.9),
 ];
+
+// Arbitrum One
+async function getProvider() {
+  const contractAddress = '0xff1a0f4744e8582DF1aE09D5611b887B6a12925C';
+  const provider = ethers.getDefaultProvider('https://arb1.arbitrum.io/rpc');
+  const contract = new ethers.Contract(contractAddress, PythAbi, provider);
+  
+  //BTC/USDC: 0xe62df6c8b4a85fe1a67db44dc12de5db330f7ac66b72dc658afedf0f4a415b43
+  //ETH/USDC: 0xff61491a931112ddf1bd8147cd1b641375f79f5825126d665480874634fd0ace
+  const priceId = '<id>';
+  const [price, conf, expo, timestamp] = await contract.getPrice(priceId);
+}
+
+
 
 export default function CollapsibleTable() {
   return (
